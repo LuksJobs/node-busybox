@@ -1,0 +1,6 @@
+# Arquivo de Variáveis e Valores 
+image:
+  repository: harbor.unimednatal.com.br/api-benef-kubernetes/api-benef
+  tag: kubernetes
+service:
+  containerPort: 3000
