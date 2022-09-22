@@ -39,11 +39,12 @@ spec:
             - containerPort: 3000
               protocol: TCP
           resources:
-            # limits:
-            # memory: 4Gi
-            # cpu: "4"
-            # requests:
-            # cpu: 1000m
+            limits:
+              memory: 2Gi
+              cpu: "900m"
+            requests:
+              memory: 1048Mi        
+              cpu: "450m"
           livenessProbe:
             httpGet:
               path: /
@@ -70,6 +71,8 @@ spec:
             name: reembolso
           - mountPath: /home/node/app/public/uploads/ouvidoria
             name: ouvidoria
+          - mountPath: /home/node/app/logs
+            name: logs
       volumes:
         - hostPath:
             path: /uploads/benef_tasy_api/autorizacoes
@@ -83,4 +86,8 @@ spec:
             path: /uploads/benef_tasy_api/ouvidoria
             type: DirectoryOrCreate
           name: ouvidoria
+        - hostPath:
+            path: /uploads/benef_tasy_api/logs
+            type: DirectoryOrCreate
+          name: logs
 status: {}
