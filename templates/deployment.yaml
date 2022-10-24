@@ -41,17 +41,17 @@ spec:
           resources:
             limits:
               memory: 2Gi
-              cpu: 900m
+              cpu: 800m
             requests:
               memory: 1048Mi        
-              cpu: 450m
+              cpu: 400m
           livenessProbe:
             httpGet:
               path: /
               port: 3000
             periodSeconds: 10
             failureThreshold: 3
-            initialDelaySeconds: 20
+            initialDelaySeconds: 10
           readinessProbe:
             httpGet: 
               path: /

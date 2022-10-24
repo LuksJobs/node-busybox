@@ -3,3 +3,8 @@ appVersion: 0.1.7
 description: API do Beneficiario do Tasy - Unimed Natal
 name: api_benef_tasy
 version: 0.1.0
+sources:
+  - http://gitlab-hml.unimednatal.com.br:8929/devops_group/helm-charts
+maintainers:
+  - name: Devops Unimed
+    email: devops@unimednatal.com.br
