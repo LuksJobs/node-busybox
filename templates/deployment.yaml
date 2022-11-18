@@ -19,6 +19,7 @@ spec:
   template:
     metadata:
       annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
         kompose.cmd: kompose convert --volumes hostPath
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
@@ -26,7 +27,6 @@ spec:
         io.kompose.service: tasy-api-benef-prod
     spec:
       restartPolicy: Always
-      #nodeName: rancher-prd-01
       containers:
         - args:
             - npm 
@@ -60,9 +60,9 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 3
           securityContext:
-            allowPrivilegeEscalation: true
+            #allowPrivilegeEscalation: true
             capabilities: {}
-            privileged: true
+            #privileged: true
             readOnlyRootFilesystem: false
           volumeMounts:
           - mountPath: /home/node/app/public/uploads/autorizacoes
