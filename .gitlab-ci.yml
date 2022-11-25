@@ -1,0 +1,42 @@
+## CHART DO BENEFICIÁRIO DO TASY DE PRODUÇÃO
+# Este projeto é voltado no CI/CD e operações rodando no ambiente do **Kubernetes** e **Docker Swarm**
+
+image: harbor.unimednatal.com.br/api-benef-tasy-prod/benef_tasy_api:latest
+
+stages:
+    - clone
+    - test
+    - push
+
+clone:
+    stage: clone
+    tags:
+        - helm-runner
+    only:
+        - chart/api-benef-tasy
+    script:
+        - cd /home/unimed/projetos/helm-projects; rm -rf benef_tasy_api
+        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-benef-tasy http://thanos:1A1e64xqYMJiL3AeVHpd@gitlab-hml.unimednatal.com.br:8929/devops_group/helm-charts.git benef_tasy_api
+        #clonando o repositório para dentro do host apartir de uma branch específica
+
+test:
+    stage: test
+    tags:
+        - helm-runner
+    only:
+        - chart/api-benef-tasy
+    script:
+        - cd /home/unimed/projetos/helm-projects; helm unittest -f Chart.yaml -q benef_tasy_api/
+        #antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
+    needs: ["clone", "build"]
+
+push:
+    stage: push
+    tags:
+        - helm-runner
+    only:
+        - chart/api-benef-tasy 
+    script:
+        - cd /home/unimed/projetos/helm-projects; helm package benef_tasy_api 
+        - cd /home/unimed/projetos/helm-projects; helm push api_benef_tasy-0.1.0.tgz oci://harbor.unimednatal.com.br/unimed-helm-charts
+    needs: ["clone", "build","test"]
