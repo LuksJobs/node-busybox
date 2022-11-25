@@ -28,7 +28,7 @@ test:
     script:
         - cd /home/unimed/projetos/helm-projects; helm unittest -f Chart.yaml -q benef_tasy_api/
         #antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
-    needs: ["clone", "build"]
+    needs: ["clone"]
 
 push:
     stage: push
@@ -39,4 +39,4 @@ push:
     script:
         - cd /home/unimed/projetos/helm-projects; helm package benef_tasy_api 
         - cd /home/unimed/projetos/helm-projects; helm push api_benef_tasy-0.1.0.tgz oci://harbor.unimednatal.com.br/unimed-helm-charts
-    needs: ["clone", "build","test"]
+    needs: ["clone", "test"]
