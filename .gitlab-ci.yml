@@ -38,6 +38,6 @@ push:
         - chart/api-benef-tasy 
     script:
         - cd /home/unimed/projetos/helm-projects; helm package benef_tasy_api 
-        - cd /home/unimed/projetos/helm-projects; helm push api_benef_tasy-0.1.0.tgz oci://harbor.unimednatal.com.br/unimed-helm-charts
-        - cd /home/unimed/projetos/helm-projects; rm api_benef_tasy-0.1.0.tgz
+        - cd /home/unimed/projetos/helm-projects; helm push api_benef_tasy-v0.1.0.tgz oci://harbor.unimednatal.com.br/unimed-helm-charts
+        - cd /home/unimed/projetos/helm-projects; rm api_benef_tasy-v0.1.0.tgz
     needs: ["clone", "test"]
