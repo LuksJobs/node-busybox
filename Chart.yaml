@@ -1,10 +1,17 @@
 apiVersion: v1
-appVersion: 0.1.7
-description: API do Beneficiario do Tasy - Unimed Natal
 name: api_benef_tasy
-version: 0.1.0
+home: unimednatal.com.br
+version: v0.1.0
+appVersion: v0.1.0
+icon: https://unimednatal.com.br/images/min/logo-unimed-topo.png
+description: API do Beneficiario do Tasy da Unimed Natal rodando com NodeJS, Express e Type ORM
 sources:
-  - http://gitlab-hml.unimednatal.com.br:8929/devops_group/helm-charts
+  - http://gitlab-hml.unimednatal.com.br:8929/devunimednatal/benef_tasy_api.git
+keywords:
+  - unimednatal
+  - kubernetes
+  - api_benef_tasy
 maintainers:
-  - name: Devops Unimed
+  - name: DevOps Unimed Natal
     email: devops@unimednatal.com.br
+    url: https://tinyurl.com/devopsunimed
