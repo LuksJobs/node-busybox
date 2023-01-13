@@ -60,9 +60,7 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 3
           securityContext:
-            #allowPrivilegeEscalation: true
             capabilities: {}
-            #privileged: true
             readOnlyRootFilesystem: false
           volumeMounts:
           - mountPath: /home/node/app/public/uploads/autorizacoes
