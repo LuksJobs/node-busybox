@@ -16,7 +16,7 @@ clone:
         - chart/api-benef-tasy
     script:
         - cd /home/unimed/projetos/helm-projects; rm -rf benef_tasy_api
-        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-benef-tasy http://thanos:1A1e64xqYMJiL3AeVHpd@gitlab.unimednatal.com.br/devops_group/helm-charts.git benef_tasy_api
+        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-benef-tasy https://thanos:1A1e64xqYMJiL3AeVHpd@gitlab.unimednatal.com.br/devops_group/helm-charts.git benef_tasy_api
         #clonando o repositório para dentro do host apartir de uma branch específica
 
 test:
