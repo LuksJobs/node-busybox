@@ -6,20 +6,20 @@ metadata:
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: tasy-api-benef-prod
-  name: tasy-api-benef-prod
+    io.kompose.service: api-servicos-dev
+  name: api-servicos-dev
 spec:
   ports:
-    - name: "tasy-api-benef-prod"
-      port: 5021
-      targetPort: 3000
+    - name: "api-servicos-dev"
+      port: 5023
+      targetPort: 3002
   externalIPs:
-    - 10.10.33.10 #rancher-prd-01 (control-plane)
-    - 10.10.33.17 #worker-prd-01
-    - 10.10.33.18 #worker-prd-02
-    - 10.10.33.19 #worker-prd-03
-    - 10.10.33.20 #worker-prd-04
+    - 10.10.34.21 #rancher-prd-01 (control-plane)
+    - 10.10.34.22 #worker-prd-01
+    - 10.10.34.23 #worker-prd-02
+    #- 10.10.33.19 #worker-prd-03
+    #- 10.10.33.20 #worker-prd-04
   selector:
-    io.kompose.service: tasy-api-benef-prod
+    io.kompose.service: api-servicos-dev
 status:
   loadBalancer: {}

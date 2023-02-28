@@ -1,6 +1,6 @@
 # Arquivo de Variáveis e Valores 
 image:
-  repository: harbor.unimednatal.com.br/api-benef-tasy-prod/benef_tasy_api
+  repository: harbor.unimednatal.com.br/api-servicos-prod/api-servicos
   tag: latest
 service:
-  containerPort: 3000
+  containerPort: 3002

@@ -4,16 +4,16 @@ metadata:
   annotations:
     kompose.cmd: kompose convert --volumes hostPath
     kompose.version: 1.26.1 (a9d05d509)
-    namespace: api-benef-tasy
+    namespace: api-servicos
   creationTimestamp: null
   labels:
-    io.kompose.service: tasy-api-benef-prod
-  name: tasy-api-benef-prod
+    io.kompose.service: api-servicos-dev
+  name: api-servicos-dev
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
-      io.kompose.service: tasy-api-benef-prod
+      io.kompose.service: api-servicos-dev
   strategy:
     type: Recreate
   template:
@@ -24,7 +24,7 @@ spec:
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: tasy-api-benef-prod
+        io.kompose.service: api-servicos-dev
     spec:
       restartPolicy: Always
       containers:
@@ -32,11 +32,11 @@ spec:
             - npm 
             - run
             - start 
-          name: tasy-api-benef-prod    
+          name: api-servicos-dev
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }} 
           imagePullPolicy: Always        
           ports:
-            - containerPort: 3000
+            - containerPort: 3002
               protocol: TCP
           resources:
             limits:
@@ -48,14 +48,14 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 3002
             periodSeconds: 10
             failureThreshold: 3
             initialDelaySeconds: 10
           readinessProbe:
             httpGet: 
               path: /
-              port: 3000
+              port: 3002
             periodSeconds: 10
             failureThreshold: 5
             initialDelaySeconds: 3
@@ -63,29 +63,17 @@ spec:
             capabilities: {}
             readOnlyRootFilesystem: false
           volumeMounts:
-          - mountPath: /home/node/app/public/uploads/autorizacoes
-            name: autorizacoes
-          - mountPath: /home/node/app/public/uploads/reembolso
-            name: reembolso
-          - mountPath: /home/node/app/public/uploads/ouvidoria
-            name: ouvidoria
-          - mountPath: /home/node/app/logs
-            name: logs
+          - mountPath: /home/node/app/src
+            name: src
+          - mountPath: /home/node/app/vendor
+            name: vendor
       volumes:
         - hostPath:
-            path: /uploads/benef_tasy_api/autorizacoes
+            path: /home/unimed/projetos/api-servicos/src
             type: DirectoryOrCreate
-          name: autorizacoes
+          name: src
         - hostPath:
-            path: /uploads/benef_tasy_api/reembolso
+            path: /home/unimed/projetos/api-servicos/vendor
             type: DirectoryOrCreate
-          name: reembolso
-        - hostPath:
-            path: /uploads/benef_tasy_api/ouvidoria
-            type: DirectoryOrCreate
-          name: ouvidoria
-        - hostPath:
-            path: /uploads/benef_tasy_api/logs
-            type: DirectoryOrCreate
-          name: logs
+          name: vendor
 status: {}
