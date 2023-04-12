@@ -17,7 +17,7 @@ clone:
         - chart/api-servicos-prd
     script:
         - cd /home/unimed/projetos/helm-projects; rm -rf api-servicos
-        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-servicos https://devopsunimed:glpat-PreJFT3SnriFSMAHFouu@gitlab.com/unimed_natal/helm-charts.git api-servicos
+        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-servicos-prd https://devopsunimed:glpat-PreJFT3SnriFSMAHFouu@gitlab.com/unimed_natal/helm-charts.git api-servicos
         
 #antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
 test:
