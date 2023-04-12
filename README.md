@@ -7,6 +7,7 @@ O **Helm** é um gerenciador de pacotes de aplicações em execução no Kuberne
 * home: unimednatal.com.br
 * version: v0.16.0
 * imageVersion: v0.16.0
+* ambiente: "**Produção**"
 
 ## API - SERVICOS
 ```

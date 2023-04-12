@@ -1,7 +1,7 @@
-## CHART DO BENEFICIÁRIO DO TASY DE PRODUÇÃO
-# Este projeto é voltado no CI/CD e operações rodando no ambiente do **Kubernetes** e **Docker Swarm**
+## CHART DA API-SERVIÇOS DE PRODUÇÃO
+# Este projeto é voltado no CI/CD e operações rodando no ambiente do Kubernetes
 
-image: harbor.unimednatal.com.br/api-benef-tasy-prod/benef_tasy_api:latest
+image: harbor.unimednatal.com.br/api-servicos-prod/${DOCKER_USERNAME}/${APPLICATION_NAME}:${IMAGE_TAG}
 
 stages:
     - clone
@@ -11,33 +11,33 @@ stages:
 clone:
     stage: clone
     tags:
-        - helm-runner
+        - chart-api-servicos
     only:
-        - chart/api-benef-tasy
+        - chart/api-servicos-prd
     script:
-        - cd /home/unimed/projetos/helm-projects; rm -rf benef_tasy_api
-        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-benef-tasy https://thanos:1A1e64xqYMJiL3AeVHpd@gitlab.unimednatal.com.br/devops_group/helm-charts.git benef_tasy_api
+        - cd /home/unimed/projetos/helm-projects; rm -rf api-servicos
+        - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-servicos https://devopsunimed:glpat-PreJFT3SnriFSMAHFouu@gitlab.com/unimed_natal/helm-charts.git api-servicos
         #clonando o repositório para dentro do host apartir de uma branch específica
 
 test:
     stage: test
     tags:
-        - helm-runner
+        - chart-api-servicos
     only:
-        - chart/api-benef-tasy
+        - chart/api-servicos-prd
     script:
-        - cd /home/unimed/projetos/helm-projects; helm unittest -f Chart.yaml -q benef_tasy_api/
+        - cd /home/unimed/projetos/helm-projects; helm unittest -f Chart.yaml -q api-servicos/
         #antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
     needs: ["clone"]
 
 push:
     stage: push
     tags:
-        - helm-runner
+        - chart-api-servicos
     only:
-        - chart/api-benef-tasy 
+        - chart/api-servicos-prd
     script:
-        - cd /home/unimed/projetos/helm-projects; helm package benef_tasy_api 
-        - cd /home/unimed/projetos/helm-projects; helm push api_benef_tasy-v0.1.0.tgz oci://harbor.unimednatal.com.br/unimed-helm-charts
-        - cd /home/unimed/projetos/helm-projects; rm api_benef_tasy-v0.1.0.tgz
+        - cd /home/unimed/projetos/helm-projects; helm package api-servicos
+        - cd /home/unimed/projetos/helm-projects; helm push api_servicos-v0.16.tgz oci://harbor.unimednatal.com.br/api-servicos-prod
+        - cd /home/unimed/projetos/helm-projects; rm api_servicos-v0.16.tgz
     needs: ["clone", "test"]

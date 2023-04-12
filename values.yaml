@@ -3,10 +3,10 @@ image:
   # -- Registro da imagem do Container
   registry: harbor.unimednatal.com.br
   # -- Repositório onde a imagem se encontra
-  repository: harbor.unimednatal.com.br/api-servicos-prod/api-servicos
+  repository: harbor.unimednatal.com.br/api-servicos-prod/unimed/api-servicos
   # -- Regra de pull da imagem (agora pela versão não mais por "latest").
   pullPolicy: IfNotPresent
   # -- Controle de versionamento de código utilizando TAG, refeencia no arquivo "Chart.yaml".
-  tag: v0.16.0
+  tag: v0.16
 service:
   containerPort: 3002

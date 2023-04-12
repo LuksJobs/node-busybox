@@ -6,20 +6,21 @@ metadata:
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: api-servicos-dev
-  name: api-servicos-dev
+    io.kompose.service: api-servicos-prd
+  name: api-servicos-prd
 spec:
   ports:
-    - name: "api-servicos-dev"
+    - name: "api-servicos-prd"
       port: 5023
       targetPort: 3002
   externalIPs:
-    - 10.10.34.21 #rancher-prd-01 (control-plane)
-    - 10.10.34.22 #worker-prd-01
-    - 10.10.34.23 #worker-prd-02
-    #- 10.10.33.19 #worker-prd-03
-    #- 10.10.33.20 #worker-prd-04
+    - 10.10.33.10 #rancher-prd-01 (control-plane)
+    - 10.10.33.17 #worker-prd-01
+    - 10.10.33.18 #worker-prd-02
+    - 10.10.33.19 #worker-prd-03
+    - 10.10.33.20 #worker-prd-02
+   
   selector:
-    io.kompose.service: api-servicos-dev
+    io.kompose.service: api-servicos-prd
 status:
   loadBalancer: {}

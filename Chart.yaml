@@ -1,8 +1,8 @@
 apiVersion: v1
-name: api_servicos
+name: api_servicos (PRODUÇÃO)
 home: unimednatal.com.br
-version: v0.16.0
-appVersion: v0.16.0
+version: v0.16
+appVersion: v0.16
 icon: https://unimednatal.com.br/images/min/logo-unimed-topo.png
 description: API de Serviços da Med Salva da Unimed Natal rodando com NodeJS, Express e Type ORM
 sources:
