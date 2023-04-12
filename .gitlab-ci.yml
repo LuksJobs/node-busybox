@@ -8,6 +8,7 @@ stages:
     - test
     - push
 
+#clonando o repositório para dentro do host apartir de uma branch específica
 clone:
     stage: clone
     tags:
@@ -17,8 +18,8 @@ clone:
     script:
         - cd /home/unimed/projetos/helm-projects; rm -rf api-servicos
         - cd /home/unimed/projetos/helm-projects; git clone -b chart/api-servicos https://devopsunimed:glpat-PreJFT3SnriFSMAHFouu@gitlab.com/unimed_natal/helm-charts.git api-servicos
-        #clonando o repositório para dentro do host apartir de uma branch específica
-
+        
+#antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
 test:
     stage: test
     tags:
@@ -27,7 +28,6 @@ test:
         - chart/api-servicos-prd
     script:
         - cd /home/unimed/projetos/helm-projects; helm unittest -f Chart.yaml -q api-servicos/
-        #antes de realizar deployment é feito testes nas estruturas do helm chart e dockerfile
     needs: ["clone"]
 
 push:
