@@ -7,24 +7,24 @@ metadata:
     namespace: api-servicos
   creationTimestamp: null
   labels:
-    io.kompose.service: api-servicos-prd
-  name: api-servicos-prd
+    io.kompose.service: api-servicos
+  name: api-servicos
 spec:
-  replicas: 3
+  replicas: 5 #quantidade de nós no ambiente de produção
   selector:
     matchLabels:
-      io.kompose.service: api-servicos-prd
+      io.kompose.service: api-servicos
   strategy:
     type: Recreate
   template:
     metadata:
       annotations:
-        rollme: {{ randAlphaNum 5 | quote }}
+        rollme: {{ randAlphaNum 5 | quote }} #estratégia para recriar os pods
         kompose.cmd: kompose convert --volumes hostPath
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: api-servicos-prd
+        io.kompose.service: api-servicos
     spec:
       restartPolicy: Always
       containers:
@@ -32,8 +32,8 @@ spec:
             - npm 
             - run
             - start 
-          name: api-servicos-prd
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }} 
+          name: api-servicos
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  
           imagePullPolicy: Always        
           ports:
             - containerPort: 3002
@@ -50,7 +50,7 @@ spec:
               path: /
               port: 3002
             periodSeconds: 10
-            failureThreshold: 5
+            failureThreshold: 3
             initialDelaySeconds: 10
           readinessProbe:
             httpGet: 
