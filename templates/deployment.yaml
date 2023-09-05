@@ -62,18 +62,18 @@ spec:
           securityContext:
             capabilities: {}
             readOnlyRootFilesystem: false
-          volumeMounts:
-          - mountPath: /home/node/app/src
-            name: src
-          - mountPath: /home/node/app/vendor
-            name: vendor
-      volumes:
-        - hostPath:
-            path: /home/unimed/projetos/api-servicos/src
-            type: DirectoryOrCreate
-          name: src
-        - hostPath:
-            path: /home/unimed/projetos/api-servicos/vendor
-            type: DirectoryOrCreate
-          name: vendor
+      #     volumeMounts:
+      #     - mountPath: /home/node/app/src
+      #       name: src
+      #     - mountPath: /home/node/app/vendor
+      #       name: vendor
+      # volumes:
+      #   - hostPath:
+      #       path: /home/unimed/projetos/api-servicos/src
+      #       type: DirectoryOrCreate
+      #     name: src
+      #   - hostPath:
+      #       path: /home/unimed/projetos/api-servicos/vendor
+      #       type: DirectoryOrCreate
+      #     name: vendor
 status: {}
