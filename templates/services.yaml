@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: api-servicos
-  name: api-servicos
+    io.kompose.service: api-tea
+  name: api-tea
 spec:
   ports:
-    - name: "api-servicos"
-      port: 5023
-      targetPort: 3002
+    - name: "api-tea"
+      port: 5091
+      targetPort: 3000
   externalIPs:
     - 10.10.33.10 #rancher-prd-01 (control-plane)
     - 10.10.33.17 #worker-prd-01
@@ -21,6 +21,6 @@ spec:
     - 10.10.33.20 #worker-prd-02
    
   selector:
-    io.kompose.service: api-servicos
+    io.kompose.service: api-tea
 status:
   loadBalancer: {}

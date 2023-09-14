@@ -7,13 +7,13 @@ metadata:
     namespace: api-servicos
   creationTimestamp: null
   labels:
-    io.kompose.service: api-servicos
-  name: api-servicos
+    io.kompose.service: api-tea
+  name: api-tea
 spec:
   replicas: 5 #quantidade de nós no ambiente de produção
   selector:
     matchLabels:
-      io.kompose.service: api-servicos
+      io.kompose.service: api-tea
   strategy:
     type: Recreate
   template:
@@ -24,19 +24,19 @@ spec:
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: api-servicos
+        io.kompose.service: api-tea
     spec:
       restartPolicy: Always
       containers:
         - args:
-            - npm 
+            - pnpm 
             - run
             - start 
-          name: api-servicos
+          name: api-tea
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  
           imagePullPolicy: Always        
           ports:
-            - containerPort: 3002
+            - containerPort: 3000
               protocol: TCP
           resources:
             limits:
@@ -48,32 +48,18 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 3002
+              port: 3000
             periodSeconds: 10
             failureThreshold: 3
             initialDelaySeconds: 10
           readinessProbe:
             httpGet: 
               path: /
-              port: 3002
+              port: 3000
             periodSeconds: 10
             failureThreshold: 5
             initialDelaySeconds: 3
           securityContext:
             capabilities: {}
             readOnlyRootFilesystem: false
-      #     volumeMounts:
-      #     - mountPath: /home/node/app/src
-      #       name: src
-      #     - mountPath: /home/node/app/vendor
-      #       name: vendor
-      # volumes:
-      #   - hostPath:
-      #       path: /home/unimed/projetos/api-servicos/src
-      #       type: DirectoryOrCreate
-      #     name: src
-      #   - hostPath:
-      #       path: /home/unimed/projetos/api-servicos/vendor
-      #       type: DirectoryOrCreate
-      #     name: vendor
 status: {}
