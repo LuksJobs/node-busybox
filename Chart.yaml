@@ -1,16 +1,16 @@
 apiVersion: v1
-name: api_servicos
+name: api_tea
 home: unimednatal.com.br
 version: v1.00
 appVersion: v1.00
 icon: https://unimednatal.com.br/images/min/logo-unimed-topo.png
-description: API de Serviços da Med Salva da Unimed Natal rodando com NodeJS, Express e Type ORM
+description: API de Tea da Unimed Natal rodando com Node, Yarn, Express, Typescript, Jest, JWT, TypeORM, ESLint e Prettier
 sources:
-  - https://gitlab.unimednatal.com.br/devunimednatal/api-servicos
+  - https://gitlab.com/unimed_natal/devops/helmcharts/api-tea-chart
 keywords:
   - unimednatal
   - kubernetes
-  - api_servicos
+  - api_tea
 maintainers:
   - name: DevOps Unimed Natal
     email: devops@unimednatal.com.br
