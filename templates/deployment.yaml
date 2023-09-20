@@ -45,20 +45,20 @@ spec:
             requests:
               memory: 1048Mi        
               cpu: 400m
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            periodSeconds: 10
-            failureThreshold: 3
-            initialDelaySeconds: 10
-          readinessProbe:
-            httpGet: 
-              path: /
-              port: 3000
-            periodSeconds: 10
-            failureThreshold: 5
-            initialDelaySeconds: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 3000
+          #   periodSeconds: 10
+          #   failureThreshold: 3
+          #   initialDelaySeconds: 10
+          # readinessProbe:
+          #   httpGet: 
+          #     path: /
+          #     port: 3000
+          #   periodSeconds: 10
+          #   failureThreshold: 5
+          #   initialDelaySeconds: 3
           securityContext:
             capabilities: {}
             readOnlyRootFilesystem: false
