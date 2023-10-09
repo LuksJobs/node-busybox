@@ -7,6 +7,6 @@ image:
   # -- Regra de pull da imagem (agora pela versão não mais por "latest").
   pullPolicy: IfNotPresent
   # -- Controle de versionamento de código utilizando TAG, refeencia no arquivo "Chart.yaml".
-  tag: 107b648b
+  tag: 0070ccb0
 service:
   containerPort: 3000
