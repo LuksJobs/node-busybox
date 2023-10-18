@@ -10,15 +10,15 @@ spec:
   minReplicas: 5 #número mínimo de réplicas
   maxReplicas: 15 #número máximo de réplicas
   metrics:
-  - type: Resource
-    resource:
-      name: cpu 
-      target:
-        type: Utilization
-        averageUtilization: 80 #métrica de uso de processo de 80%
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80 #métrica de uso de memória de 80%
+    - type: Resource
+      resource:
+        name: cpu 
+        target:
+          type: Utilization
+          averageUtilization: 80 #métrica de uso de processo de 80%
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80 #métrica de uso de memória de 80%
