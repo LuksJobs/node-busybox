@@ -1,15 +1,22 @@
-## API-TEA - HELM Charts 
+```
+ █████╗ ██████╗ ██╗    ████████╗███████╗ █████╗ 
+██╔══██╗██╔══██╗██║    ╚══██╔══╝██╔════╝██╔══██╗
+███████║██████╔╝██║       ██║   █████╗  ███████║
+██╔══██║██╔═══╝ ██║       ██║   ██╔══╝  ██╔══██║
+██║  ██║██║     ██║       ██║   ███████╗██║  ██║
+╚═╝  ╚═╝╚═╝     ╚═╝       ╚═╝   ╚══════╝╚═╝  ╚═╝
+```
 
 O **Helm** é um gerenciador de pacotes de aplicações em execução no Kubernetes que descreve a estrutura de uma aplicação através dos *Helm Charts*, facilitando a instalação e o gerenciamento de pacotes e suas dependências. O Helm é semelhante aos gerenciadores de pacotes de sistemas operacionais yum, apt m, Homebrew, etc.
 
 * apiVersion: v1
 * name: api_tea
 * home: unimednatal.com.br
-* version: v0.16.0
-* imageVersion: v0.16.0
+* version: v1.00
+* imageVersion: v1.00
 * ambiente: "**Produção**"
 
-## API - SERVICOS
+## API - TEA
 ```
 ├── charts
 ├── Chart.yaml
