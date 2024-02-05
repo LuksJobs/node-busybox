@@ -1,4 +1,14 @@
-## Configuração da Imagem da API-Tea 
+# Regras de formatação:
+#
+#  | Sinal | Descrição                                                              |
+#  |-------|------------------------------------------------------------------------|
+#  | # --  | Comentário  renderizado no README.md.                                  |
+#  | #     | Somente se definido após '# --', indica a continuação da sentença.     |
+#  | ##    | Comentário é ignorado durante a renderização do README.md.             |
+#
+#  Leia mais em https://github.com/norwoodj/helm-docs
+
+## Configuração da imagem da api-tea
 image:
   # -- Registro da imagem do Container
   registry: harbor.unimednatal.com.br
@@ -8,5 +18,52 @@ image:
   pullPolicy: IfNotPresent
   # -- Controle de versionamento de código utilizando TAG, refeencia no arquivo "Chart.yaml".
   tag: 47d13b72
+
+## Configuração que expõe o serviço do aplicativo para acesso externo.
 service:
+  Name: "api-tea-svc"
+  Port: 5091
   containerPort: 3000
+  targetPort: 3000
+
+## Configuração do HPA da API do Beneficiário do Tasy
+
+autoscalling: 
+# Quantidade mínima e máxima das réplicas dos containers
+  Name: "api-tea-hpa"
+  minreplicaCount: 2
+  maxreplicaCount: 6
+
+# -- Role Based Access para definir os acessos aos Pods.
+# [Ref doc](https://kubernetes.io/docs/admin/authorization/rbac/).
+rbac:
+  create: false  # Habilita a criação do ClusterRole
+
+# -- Configura a Política de Segurança de Pod para permitir que o Aplicativo seja executado em clusters restritos.
+# [Ref doc](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
+podSecurityPolicy: 
+  enabled: false
+
+# Criando uma conta de serviço para o aplicativo
+serviceAccount:
+  # -- If true, a ServiceAccount is automatically created.
+  create: true
+  # -- The name of the service account to use.
+  # If not set, a name is generated using the fullname template.
+  name: "api-tea"
+  # -- Extra annotations for the ServiceAccount.
+  annotations: {}
+
+# -- Configura o contexto de segurança para gerenciar os privilégios do usuário no Pod.
+# [Ref doc](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod).
+# @default -- Runs as a Non-Privileged user.
+securityContext:
+  runAsUser: 101
+  runAsGroup: 101
+
+# -- Configura o contexto de segurança do contêiner.
+# [Ref doc](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container).
+containerSecurityContext:
+  privileged: false
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
