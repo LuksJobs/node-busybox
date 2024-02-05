@@ -1,14 +1,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: api-tea-hpa
+  name: {{ .Values.autoscalling.Name }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: api-tea
-  minReplicas: 5 #número mínimo de réplicas
-  maxReplicas: 15 #número máximo de réplicas
+    name: {{ .Chart.Name }}
+  minReplicas: {{ .Values.autoscalling.minreplicaCount }} #número mínimo de réplicas
+  maxReplicas: {{ .Values.autoscalling.maxreplicaCount }} #número máximo de réplicas
   metrics:
     - type: Resource
       resource:
