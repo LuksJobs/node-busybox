@@ -31,8 +31,8 @@ service:
 autoscalling: 
 # Quantidade mínima e máxima das réplicas dos containers
   Name: "api-tea-hpa"
-  minreplicaCount: 2
-  maxreplicaCount: 6
+  minreplicaCount: 5
+  maxreplicaCount: 15
 
 # -- Role Based Access para definir os acessos aos Pods.
 # [Ref doc](https://kubernetes.io/docs/admin/authorization/rbac/).
