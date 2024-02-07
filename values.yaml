@@ -17,7 +17,7 @@ image:
   # -- Regra de pull da imagem (agora pela versão não mais por "latest").
   pullPolicy: IfNotPresent
   # -- Controle de versionamento de código utilizando TAG, refeencia no arquivo "Chart.yaml".
-  tag: 2ad17f18
+  tag: 6e60e5d8
 
 ## Configuração que expõe o serviço do aplicativo para acesso externo.
 service:
