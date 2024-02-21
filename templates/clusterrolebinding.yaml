@@ -1,0 +1,19 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "api-tea.fullname" . }}-clusterrolebinding
+  labels:
+    app.kubernetes.io/name: {{ include "api-tea.name" . }}
+    helm.sh/chart: {{ include "api-tea.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "api-tea.fullname" . }}-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: {{ include "api-tea.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}
