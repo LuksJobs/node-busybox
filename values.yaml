@@ -28,16 +28,51 @@ service:
 
 ## Configuração do HPA da API do Beneficiário do Tasy
 
-autoscalling: 
+autoscaling: 
 # Quantidade mínima e máxima das réplicas dos containers
-  Name: "api-tea-hpa"
-  minreplicaCount: 5
-  maxreplicaCount: 15
+  #Name: "api-tea-hpa"
+  enabled: true
+  minReplicas: 5
+  maxReplicas: 15
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
 # -- Role Based Access para definir os acessos aos Pods.
 # [Ref doc](https://kubernetes.io/docs/admin/authorization/rbac/).
 rbac:
-  create: false  # Habilita a criação do ClusterRole
+  create: true  # Habilita a criação do ClusterRole
+  Name: "api-tea-role"
+  rules:
+    - apiGroups: [""]
+      resources: ["pods", "services", "configmaps", "secrets", "persistentvolumeclaims", "deployments", "serviceaccount"]
+      verbs: ["*"]
+  # -- Deprecated. Use `rbac.groups` instead.
+  staticGroupName: ""
+  # -- Use this to create RBAC resources for specified group subjects.
+  groups:
+    'api-tea-plugins-default':
+      create: false
+      rules:
+        - apiGroups: ["*"]
+          resources: ["*"]
+          verbs: ["get", "watch", "list"]
+    'argocd':
+      # -- Set it to `true` when using ArgoCD source plugin.
+      create: false
+      rules:
+        - apiGroups: [""]
+          resources: ["configmaps"]
+          verbs: ["get", "update"]
+        - apiGroups: ["argoproj.io"]
+          resources: ["applications"]
+          verbs: ["get", "patch"]
+    'flux-read-patch':
+      # -- Set it to `true` when using Flux executor plugin to enable `flux diff`.
+      create: false
+      rules:
+        - apiGroups: ["*"]
+          resources: ["*"]
+          verbs: ["get", "watch", "list", "patch"]
 
 # -- Configura a Política de Segurança de Pod para permitir que o Aplicativo seja executado em clusters restritos.
 # [Ref doc](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
@@ -46,7 +81,7 @@ podSecurityPolicy:
 
 # Criando uma conta de serviço para o aplicativo
 serviceAccount:
-  # -- If true, a ServiceAccount is automatically created.
+  # -- Defina como true se você quiser que o Helm crie o ServiceAccount
   create: true
   # -- The name of the service account to use.
   # If not set, a name is generated using the fullname template.
@@ -67,3 +102,9 @@ containerSecurityContext:
   privileged: false
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
