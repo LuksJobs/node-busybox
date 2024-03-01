@@ -2,16 +2,16 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "api-tea.fullname" . }}-clusterrole
+  name: {{ include "node-busybox.fullname" . }}-clusterrole
   labels:
-    app.kubernetes.io/name: {{ include "api-tea.name" . }}
-    helm.sh/chart: {{ include "api-tea.chart" . }}
+    app.kubernetes.io/name: {{ include "node-busybox.name" . }}
+    helm.sh/chart: {{ include "node-busybox.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 rules:
 {{- if .Values.podSecurityPolicy.enabled }}
   - apiGroups: [ "extensions" ]
-    resourceNames: [ "api-tea-psp" ]
+    resourceNames: [ "node-busybox-psp" ]
     resources: [ "podsecuritypolicies" ]
     verbs: [ "use" ]
 {{ end }}
