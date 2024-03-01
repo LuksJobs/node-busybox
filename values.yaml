@@ -8,21 +8,21 @@
 #
 #  Leia mais em https://github.com/norwoodj/helm-docs
 
-## Configuração da imagem da api-tea
+## Configuração da imagem da node-busybox
 image:
   # -- Registro da imagem do Container
-  registry: harbor.unimednatal.com.br
+  registry: dockerhub.com
   # -- Repositório onde a imagem se encontra
-  repository: harbor.unimednatal.com.br/api-tea-prod/unimed/api-tea
+  repository: luksjobs/node-busybox
   # -- Regra de pull da imagem (agora pela versão não mais por "latest").
   pullPolicy: IfNotPresent
   # -- Controle de versionamento de código utilizando TAG, refeencia no arquivo "Chart.yaml".
-  tag: 2ce5b82e
+  tag: v1.1
 
 ## Configuração que expõe o serviço do aplicativo para acesso externo.
 service:
-  Name: "api-tea-svc"
-  Port: 5091
+  Name: "node-busybox-svc"
+  Port: 3015
   containerPort: 3000
   targetPort: 3000
 
@@ -30,10 +30,10 @@ service:
 
 autoscaling: 
 # Quantidade mínima e máxima das réplicas dos containers
-  #Name: "api-tea-hpa"
+  #Name: "node-busybox-hpa"
   enabled: true
-  minReplicas: 5
-  maxReplicas: 15
+  minReplicas: 1
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
@@ -41,7 +41,7 @@ autoscaling:
 # [Ref doc](https://kubernetes.io/docs/admin/authorization/rbac/).
 rbac:
   create: true  # Habilita a criação do ClusterRole
-  Name: "api-tea-role"
+  Name: "node-busybox-role"
   rules:
     - apiGroups: [""]
       resources: ["pods", "services", "configmaps", "secrets", "persistentvolumeclaims", "deployments", "serviceaccount"]
@@ -50,7 +50,7 @@ rbac:
   staticGroupName: ""
   # -- Use this to create RBAC resources for specified group subjects.
   groups:
-    'api-tea-plugins-default':
+    'node-busybox-plugins-default':
       create: false
       rules:
         - apiGroups: ["*"]
@@ -85,7 +85,7 @@ serviceAccount:
   create: true
   # -- The name of the service account to use.
   # If not set, a name is generated using the fullname template.
-  name: "api-tea"
+  name: "node-busybox"
   # -- Extra annotations for the ServiceAccount.
   annotations: {}
 

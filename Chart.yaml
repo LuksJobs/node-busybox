@@ -1,17 +1,17 @@
 apiVersion: v1
-name: api-tea
+name: node-busybox
 home: unimednatal.com.br
 version: v1.1.0
 appVersion: v1.1.0
-icon: https://unimednatal.com.br/images/min/logo-unimed-topo.png
-description: API de Tea da Unimed Natal rodando com Node, Yarn, Express, Typescript, Jest, JWT, TypeORM, ESLint e Prettier
+icon: https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/21926c49221993.58ae3b9c8bdd5.jpg
+description: Aplicação básica em NodeJS mostrando algumas funções do Hello World e o Cookie Parser.
 sources:
-  - https://gitlab.com/unimed_natal/devops/helmcharts/api-tea-chart
+  - https://github.com/LuksJobs/node-busybox
 keywords:
-  - unimednatal
+  - nodejs
   - kubernetes
-  - api_tea
+  - express
 maintainers:
-  - name: DevOps Unimed Natal
-    email: devops@unimednatal.com.br
-    url: https://tinyurl.com/devopsunimed
+  - name: Lucas Oliveira Dantas
+    email: luksjobs@live.com
+    url: https://luks.dev.br
