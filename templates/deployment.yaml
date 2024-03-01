@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     version: {{ .Chart.Version }}
-    namespace: api-tea
+    namespace: node-busybox
   creationTimestamp: null
   labels:
     app: {{ .Chart.Name }}
@@ -26,9 +26,9 @@ spec:
       restartPolicy: Always
       containers:
         - args:
-            - pnpm
+            - npm
             - run 
-            - start 
+            - start:dev 
           name: {{ .Chart.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }} 
           imagePullPolicy: Always        
@@ -37,25 +37,25 @@ spec:
               protocol: TCP
           resources:
             limits:
-              memory: 2Gi
+              memory: 1Gi
               cpu: 800m
             requests:
-              memory: 1048Mi        
+              memory: 548Mi        
               cpu: 400m
-          livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.containerPort }}
-            periodSeconds: 10
-            failureThreshold: 3
-            initialDelaySeconds: 10
-          readinessProbe:
-            httpGet: 
-              path: /
-              port: {{ .Values.service.containerPort }}
-            periodSeconds: 10
-            failureThreshold: 5
-            initialDelaySeconds: 3
+          #livenessProbe:
+            #httpGet:
+              #path: /
+              #port: {{ .Values.service.Port }}
+            #periodSeconds: 10
+            #failureThreshold: 3
+            #initialDelaySeconds: 10
+          #readinessProbe:
+            #httpGet: 
+              #path: /
+              #port: {{ .Values.service.Port }}
+            #periodSeconds: 10
+            #failureThreshold: 5
+            #initialDelaySeconds: 3
           securityContext:
             capabilities: {}
             readOnlyRootFilesystem: false
